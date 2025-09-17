@@ -1,3 +1,10 @@
+const { contextBridge, ipcRenderer } = require('electron');
+
+contextBridge.exposeInMainWorld('api', {
+    closeWindow: () => ipcRenderer.invoke('close-window'),
+    captureAndAnalyze: (mode) => ipcRenderer.invoke('analyze-screenshot', { mode }),
+});
+
 // 簡單文字應用的預載入腳本
 const { contextBridge, ipcRenderer } = require('electron');
 

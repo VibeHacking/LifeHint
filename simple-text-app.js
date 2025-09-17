@@ -8,7 +8,7 @@ function createWindow() {
     // 創建瀏覽器窗口，保持Glass的視覺風格
     mainWindow = new BrowserWindow({
         width: 800,
-        height: 600,
+        height: 400,
         webPreferences: {
             nodeIntegration: false,
             contextIsolation: true,
@@ -71,4 +71,49 @@ app.on('activate', () => {
 ipcMain.handle('update-text', async (event, newText) => {
     // 可以在這裡處理文字更新邏輯
     return { success: true, text: newText };
+});
+
+// IPC: 關閉視窗
+ipcMain.handle('close-window', async () => {
+    if (mainWindow && !mainWindow.isDestroyed()) {
+        mainWindow.close();
+        return { success: true };
+    }
+    const focused = BrowserWindow.getFocusedWindow();
+    if (focused && !focused.isDestroyed()) {
+        focused.close();
+        return { success: true };
+    }
+    return { success: false };
+});
+
+// IPC: 模擬截圖並分析
+ipcMain.handle('analyze-screenshot', async (event, { mode }) => {
+    // 這裡暫時回傳 mock 結果，未來可改成真實截圖與後端 API 呼叫
+    const now = new Date().toISOString();
+    if (mode === 'action-steps') {
+        return {
+            success: true,
+            mode,
+            createdAt: now,
+            summary: '操作建議（Mock）',
+            suggestions: [
+                '步驟 1：確認目前焦點視窗與輸入框位置。',
+                '步驟 2：按下 Ctrl+V 貼上已複製內容或輸入指令。',
+                '步驟 3：點擊「送出」或按 Enter 完成提交。',
+            ],
+        };
+    }
+    // 預設為文字回覆建議
+    return {
+        success: true,
+        mode: 'text-reply',
+        createdAt: now,
+        summary: '建議回復（Mock）',
+        suggestions: [
+            '您好！這是一則示範回覆，展示 AI 建議輸出的格式。',
+            '如果您正在撰寫訊息，建議先確認對方需求並提供明確步驟或範例。',
+            '若需要更精準的內容，請按 Ctrl+Shift+S 重新截圖並分析。',
+        ],
+    };
 });

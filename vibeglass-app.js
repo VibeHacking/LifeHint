@@ -120,23 +120,29 @@ ipcMain.handle('close-window', async () => {
 // IPC: 真實截圖並分析
 ipcMain.handle('analyze-screenshot', async (_, { mode }) => {
     try {
-        console.log('開始截圖...', mode);
-        
+        console.log('開始截圖與 AI 分析...', mode);
+
         // 1. 執行截圖
         const screenshot = await captureScreen();
-        
+
         // 2. 保存截圖
         const screenshotDir = ensureScreenshotDir();
         const timestamp = Date.now();
         const filename = `screenshot_${timestamp}.png`;
         const screenshotPath = path.join(screenshotDir, filename);
-        
+
         fs.writeFileSync(screenshotPath, screenshot);
         console.log('截圖已保存:', screenshotPath);
-        
+
         const now = new Date().toISOString();
-        
-        // 3. 分析結果 (目前先回傳基本資訊，之後可串接 AI API)
+
+        // 3. Mock AI 分析結果
+        console.log('模擬 AI 分析中...');
+
+        // 模擬 API 延遲
+        await new Promise(resolve => setTimeout(resolve, 1000));
+
+        // 根據模式回傳不同的 mock 資料
         if (mode === 'action-steps') {
             return {
                 success: true,
@@ -144,30 +150,48 @@ ipcMain.handle('analyze-screenshot', async (_, { mode }) => {
                 createdAt: now,
                 screenshotPath,
                 screenshotSize: screenshot.length,
-                summary: '已成功截圖 - 操作建議',
+                summary: '螢幕分析完成 - 操作建議',
+                analysisText: `根據螢幕截圖分析，以下是建議的操作步驟：
+
+1. 檢查目前開啟的應用程式狀態
+2. 確認是否有未完成的任務需要處理
+3. 考慮切換到相關的工作區域
+4. 如有需要，可以開啟新的應用程式視窗
+5. 建議整理桌面以提升工作效率`,
                 suggestions: [
-                    `已截取螢幕並保存到: ${filename}`,
-                    `圖片大小: ${Math.round(screenshot.length / 1024)}KB`,
-                    '可在此基礎上進行進一步的 AI 分析',
+                    '1. 檢查目前開啟的應用程式狀態',
+                    '2. 確認是否有未完成的任務需要處理',
+                    '3. 考慮切換到相關的工作區域',
+                    '4. 如有需要，可以開啟新的應用程式視窗',
+                    '5. 建議整理桌面以提升工作效率'
+                ],
+            };
+        } else {
+            return {
+                success: true,
+                mode: 'text-reply',
+                createdAt: now,
+                screenshotPath,
+                screenshotSize: screenshot.length,
+                summary: '螢幕分析完成 - 回覆建議',
+                analysisText: `基於目前螢幕內容的智能回覆建議：
+
+根據畫面顯示的內容，建議您可以：
+- 回覆確認收到相關訊息
+- 詢問是否需要進一步協助
+- 分享相關的想法或意見
+- 提供具體的時間安排
+- 表達感謝或關心`,
+                suggestions: [
+                    '收到，我會盡快處理這件事',
+                    '好的，請問還有其他需要注意的地方嗎？',
+                    '謝謝你的提醒，我覺得這個想法很不錯',
+                    '我大概會在下午完成，到時候再跟你確認',
+                    '辛苦了！有任何問題都可以隨時聯絡我'
                 ],
             };
         }
-        
-        // 預設為文字回覆建議
-        return {
-            success: true,
-            mode: 'text-reply',
-            createdAt: now,
-            screenshotPath,
-            screenshotSize: screenshot.length,
-            summary: '已成功截圖 - 回覆建議',
-            suggestions: [
-                `已截取螢幕並保存到: ${filename}`,
-                `圖片大小: ${Math.round(screenshot.length / 1024)}KB`,
-                '可基於此截圖內容進行分析和回覆',
-            ],
-        };
-        
+
     } catch (error) {
         console.error('截圖分析失敗:', error);
         return {

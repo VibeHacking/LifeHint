@@ -17,8 +17,7 @@ function createWindow() {
         frame: false, // 無邊框，如原始Glass
         transparent: true, // 透明背景，如原始Glass
         vibrancy: 'under-window', // 開啟vibrancy霧化效果
-        roundedCorners: true, // 啟用圓角
-        cornerRadius: 100, // 設定較大的圓角半徑
+        roundedCorners: true, // 啟用圓角（注意：Electron不支援自定義圓角半徑）
         show: false, // 初始不顯示，等載入完成
         alwaysOnTop: true, // 保持在最上層
         skipTaskbar: true, // 不顯示在任務列

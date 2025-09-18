@@ -68,7 +68,7 @@ app.on('activate', () => {
 });
 
 // IPC處理程序 - 用於文字更新
-ipcMain.handle('update-text', async (event, newText) => {
+ipcMain.handle('update-text', async (_, newText) => {
     // 可以在這裡處理文字更新邏輯
     return { success: true, text: newText };
 });
@@ -88,7 +88,7 @@ ipcMain.handle('close-window', async () => {
 });
 
 // IPC: 模擬截圖並分析
-ipcMain.handle('analyze-screenshot', async (event, { mode }) => {
+ipcMain.handle('analyze-screenshot', async (_, { mode }) => {
     // 這裡暫時回傳 mock 結果，未來可改成真實截圖與後端 API 呼叫
     const now = new Date().toISOString();
     if (mode === 'action-steps') {

@@ -39,20 +39,20 @@
         /* Top bar */
         #topbar {
             position: absolute;
-            top: 0;
+            top: 10px;
             left: 10px;
             right: 10px;
             height: 44px;
             display: grid;
             grid-template-columns: 1fr auto 1fr;
             align-items: center;
-            padding: 0 10px;
+            padding: 0 8px;
             -webkit-app-region: drag;
             pointer-events: auto;
             background: var(--glass-bg-deeper);
             backdrop-filter: blur(32px) saturate(180%);
             border-bottom: 1px solid var(--glass-border);
-            border-radius: 0 0 16px 16px;
+            border-radius: 16px 16px 16px 16px;
             box-shadow:
                 0 4px 16px rgba(0, 0, 0, 0.25),
                 0 2px 8px rgba(0, 0, 0, 0.15),
@@ -65,7 +65,7 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            border-radius: 8px;
+            border-radius: 10px;
             border: 1px solid var(--glass-border);
             background: var(--glass-bg);
             color: var(--fg);
@@ -105,7 +105,7 @@
         #mode-select {
             appearance: none;
             padding: 6px 10px;
-            border-radius: 8px;
+            border-radius: 10px;
             border: 1px solid var(--glass-border-strong);
             background: rgba(255, 255, 255, 0.1);
             color: var(--fg);
@@ -118,7 +118,7 @@
         /* Content (middle) */
         #content {
             position: absolute;
-            top: 44px;
+            top: 54px;
             left: 0;
             right: 0;
             bottom: 160px; /* space for AI panel when open */
@@ -131,7 +131,7 @@
             position: absolute;
             left: 10px;
             right: 10px;
-            top: 60px;
+            top: 70px;
             height: 150px;
             border-radius: 16px;
             border: 1px solid var(--glass-border);

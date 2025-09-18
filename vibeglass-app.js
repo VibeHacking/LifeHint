@@ -1,6 +1,7 @@
 // 簡單的文字顯示應用程式 - 基於Glass UI
-const { app, BrowserWindow, ipcMain } = require('electron');
+const { app, BrowserWindow, ipcMain, desktopCapturer } = require('electron');
 const path = require('node:path');
+const fs = require('fs');
 
 let mainWindow;
 
@@ -49,6 +50,36 @@ function createWindow() {
     });
 }
 
+// 截圖功能 - 針對 Windows 優化
+async function captureScreen() {
+    try {
+        const sources = await desktopCapturer.getSources({
+            types: ['screen'],
+            thumbnailSize: { width: 1920, height: 1080 }
+        });
+        
+        // 取得主螢幕 (Windows 通常是第一個)
+        const primarySource = sources[0];
+        if (!primarySource) {
+            throw new Error('無法獲取螢幕來源');
+        }
+        
+        return primarySource.thumbnail.toPNG();
+    } catch (error) {
+        console.error('截圖失敗:', error);
+        throw error;
+    }
+}
+
+// 確保截圖目錄存在
+function ensureScreenshotDir() {
+    const screenshotDir = path.join(__dirname, 'screenshots');
+    if (!fs.existsSync(screenshotDir)) {
+        fs.mkdirSync(screenshotDir, { recursive: true });
+    }
+    return screenshotDir;
+}
+
 // 當Electron完成初始化時調用此方法
 app.whenReady().then(createWindow);
 
@@ -86,33 +117,70 @@ ipcMain.handle('close-window', async () => {
     return { success: false };
 });
 
-// IPC: 模擬截圖並分析
+// IPC: 真實截圖並分析
 ipcMain.handle('analyze-screenshot', async (_, { mode }) => {
-    // 這裡暫時回傳 mock 結果，未來可改成真實截圖與後端 API 呼叫
-    const now = new Date().toISOString();
-    if (mode === 'action-steps') {
+    try {
+        console.log('開始截圖...', mode);
+        
+        // 1. 執行截圖
+        const screenshot = await captureScreen();
+        
+        // 2. 保存截圖
+        const screenshotDir = ensureScreenshotDir();
+        const timestamp = Date.now();
+        const filename = `screenshot_${timestamp}.png`;
+        const screenshotPath = path.join(screenshotDir, filename);
+        
+        fs.writeFileSync(screenshotPath, screenshot);
+        console.log('截圖已保存:', screenshotPath);
+        
+        const now = new Date().toISOString();
+        
+        // 3. 分析結果 (目前先回傳基本資訊，之後可串接 AI API)
+        if (mode === 'action-steps') {
+            return {
+                success: true,
+                mode,
+                createdAt: now,
+                screenshotPath,
+                screenshotSize: screenshot.length,
+                summary: '已成功截圖 - 操作建議',
+                suggestions: [
+                    `已截取螢幕並保存到: ${filename}`,
+                    `圖片大小: ${Math.round(screenshot.length / 1024)}KB`,
+                    '可在此基礎上進行進一步的 AI 分析',
+                ],
+            };
+        }
+        
+        // 預設為文字回覆建議
         return {
             success: true,
-            mode,
+            mode: 'text-reply',
             createdAt: now,
-            summary: '操作建議（Mock）',
+            screenshotPath,
+            screenshotSize: screenshot.length,
+            summary: '已成功截圖 - 回覆建議',
             suggestions: [
-                '步驟 1：確認目前焦點視窗與輸入框位置。',
-                '步驟 2：按下 Ctrl+V 貼上已複製內容或輸入指令。',
-                '步驟 3：點擊「送出」或按 Enter 完成提交。',
+                `已截取螢幕並保存到: ${filename}`,
+                `圖片大小: ${Math.round(screenshot.length / 1024)}KB`,
+                '可基於此截圖內容進行分析和回覆',
+            ],
+        };
+        
+    } catch (error) {
+        console.error('截圖分析失敗:', error);
+        return {
+            success: false,
+            error: error.message,
+            mode,
+            createdAt: new Date().toISOString(),
+            summary: '截圖失敗',
+            suggestions: [
+                `錯誤訊息: ${error.message}`,
+                '請檢查螢幕錄製權限',
+                '或稍後再試一次',
             ],
         };
     }
-    // 預設為文字回覆建議
-    return {
-        success: true,
-        mode: 'text-reply',
-        createdAt: now,
-        summary: '建議回復（Mock）',
-        suggestions: [
-            '您好！這是一則示範回覆，展示 AI 建議輸出的格式。',
-            '如果您正在撰寫訊息，建議先確認對方需求並提供明確步驟或範例。',
-            '若需要更精準的內容，請按 Ctrl+Shift+S 重新截圖並分析。',
-        ],
-    };
 });

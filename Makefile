@@ -1,15 +1,15 @@
 ifeq ($(OS),Windows_NT)
-    NPX = npx.cmd
-    ELECTRON = electron
-    RM = del /Q /S
-    RMDIR = rmdir /Q /S
-	ENTRY_FILE = .\simple-text-app.js 
+	NPX = npx.cmd
+	ELECTRON = electron
+	RM = del /Q /S
+	RMDIR = rmdir /Q /S
+	ENTRY_FILE = .\vibeglass-app.js
 else
-    NPX = npx
-    ELECTRON = electron
-    RM = rm -f
-    RMDIR = rm -rf
-	ENTRY_FILE = ./simple-text-app.js 
+	NPX = npx
+	ELECTRON = electron
+	RM = rm -f
+	RMDIR = rm -rf
+	ENTRY_FILE = ./vibeglass-app.js
 endif
 
 run:

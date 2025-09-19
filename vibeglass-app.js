@@ -137,6 +137,7 @@ ipcMain.handle('analyze-screenshot', async (_, { mode }) => {
         const now = new Date().toISOString();
 
         // 3. Mock AI 分析結果
+        // TODO: 等下要改這裡
         console.log('模擬 AI 分析中...');
 
         // 模擬 API 延遲

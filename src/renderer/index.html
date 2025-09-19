@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VibeGlassing</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="app">
+        <div id="topbar">
+            <button id="btn-close" title="關閉">✕</button>
+            <div id="hotkeys">
+                <span>打開/收起 <span class="kbd">Ctrl</span>+<span class="kbd">J</span></span>
+                <span>截圖並傳送 <span class="kbd">Ctrl</span>+<span class="kbd">Shift</span>+<span class="kbd">S</span></span>
+            </div>
+            <div id="mode">
+                <label for="mode-select">模式</label>
+                <select id="mode-select">
+                    <option value="text-reply">建議回復（文字）</option>
+                    <option value="action-steps">操作建議（步驟）</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="ai-panel" class="open">
+            <div class="panel-header">
+                <div>AI 建議</div>
+                <div class="panel-actions">
+                    <button id="btn-capture" class="ghost-btn">截圖並傳送</button>
+                    <button id="btn-toggle" class="ghost-btn">收起</button>
+                </div>
+            </div>
+            <div id="suggestions"></div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

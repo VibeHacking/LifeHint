@@ -3,13 +3,13 @@ ifeq ($(OS),Windows_NT)
 	ELECTRON = electron
 	RM = del /Q /S
 	RMDIR = rmdir /Q /S
-	ENTRY_FILE = .\vibeglass-app.js
+	ENTRY_FILE = .\src\main\main.js
 else
 	NPX = npx
 	ELECTRON = electron
 	RM = rm -f
 	RMDIR = rm -rf
-	ENTRY_FILE = ./vibeglass-app.js
+	ENTRY_FILE = ./src/main/main.js
 endif
 
 run:

@@ -3,7 +3,7 @@
     "productName": "Glass",
     "version": "0.2.4",
     "description": "Cl*ely for Free",
-    "main": "src/index.js",
+    "main": "src/main/main.js",
     "scripts": {
         "setup": "npm install && cd pickleglass_web && npm install && npm run build && cd .. && npm start",
         "start": "npm run build:renderer && electron .",

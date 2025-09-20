@@ -37,6 +37,16 @@
             })
             .join('');
         suggestionsEl.innerHTML = html || '<div class="suggestion"><div class="text">尚無建議</div></div>';
+        
+        // 根據內容量動態調整面板高度
+        setTimeout(() => {
+            const contentHeight = suggestionsEl.scrollHeight + 60; // 加上 header 高度
+            if (contentHeight > 180) {
+                panel.classList.add('expanded');
+            } else {
+                panel.classList.remove('expanded');
+            }
+        }, 10);
     }
 
     async function captureAndAnalyze() {

@@ -139,7 +139,7 @@ html, body {
     left: 10px;
     right: 10px;
     top: 70px;
-    height: 300px;
+    height: 120px;
     border-radius: 16px;
     border: 1px solid var(--glass-border);
     background: var(--glass-bg-dark);
@@ -148,8 +148,12 @@ html, body {
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    transition: transform 180ms ease, opacity 180ms ease;
+    transition: transform 180ms ease, opacity 180ms ease, height 300ms ease;
     -webkit-app-region: no-drag;
+}
+
+#ai-panel.expanded {
+    height: 300px;
 }
 
 #ai-panel.closed { 
@@ -193,6 +197,7 @@ html, body {
     padding: 10px 12px;
     display: grid;
     gap: 8px;
+    transition: height 300ms ease;
 }
 
 .suggestion {
@@ -200,7 +205,10 @@ html, body {
     border-radius: 10px;
     border: 1px solid var(--glass-border);
     background: rgba(255,255,255,0.06);
-    transition: all 0.2s ease;
+    transition: all 0.2s ease, opacity 300ms ease, transform 300ms ease;
+    opacity: 0;
+    transform: translateY(10px);
+    animation: slideInUp 400ms ease forwards;
 }
 
 .suggestion:hover { 
@@ -275,6 +283,17 @@ html, body {
     to {
         opacity: 1;
         transform: scale(1);
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 

@@ -5,6 +5,7 @@ contextBridge.exposeInMainWorld('api', {
     closeWindow: () => ipcRenderer.invoke('close-window'),
     captureAndAnalyze: (mode) => ipcRenderer.invoke('analyze-screenshot', { mode }),
     updateText: (text) => ipcRenderer.invoke('update-text', text),
+    resizeWindow: (width, height) => ipcRenderer.invoke('resize-window', { width, height }),
     
     // 模擬Glass的一些API結構
     glass: {

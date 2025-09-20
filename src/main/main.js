@@ -44,3 +44,12 @@ ipcMain.handle('close-window', async () => {
     }
     return { success: false };
 });
+
+// IPC: 調整窗口大小
+ipcMain.handle('resize-window', async (_, { width, height }) => {
+    if (mainWindow && !mainWindow.isDestroyed()) {
+        mainWindow.setSize(width, height);
+        return { success: true };
+    }
+    return { success: false };
+});

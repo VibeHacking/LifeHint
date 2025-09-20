@@ -51,7 +51,7 @@
 
     async function captureAndAnalyze() {
         btnCapture.disabled = true;
-        btnCapture.textContent = '分析中…';
+        btnCapture.textContent = 'Processing ...';
         try {
             const mode = modeSelect.value;
             const result = await window.api.captureAndAnalyze(mode);
@@ -62,7 +62,7 @@
             console.error(err);
         } finally {
             btnCapture.disabled = false;
-            btnCapture.textContent = '截圖並傳送';
+            btnCapture.textContent = 'Screenshot & Send';
         }
     }
 

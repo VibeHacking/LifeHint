@@ -340,3 +340,24 @@ html, body {
     bottom: 15px;
     right: 15px;
 }
+
+::-webkit-scrollbar {
+    width: 10px;   
+    height: 10px;  
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(100, 100, 255, 0.5);
+    border-radius: 10px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(100, 100, 255, 0.8);
+}

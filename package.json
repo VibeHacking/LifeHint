@@ -1,6 +1,6 @@
 {
-    "name": "pickle-glass",
-    "productName": "Glass",
+    "name": "life-hint",
+    "productName": "LifeHint",
     "version": "0.2.4",
     "description": "Cl*ely for Free",
     "main": "src/main/main.js",
@@ -15,14 +15,12 @@
     },
     "keywords": [
         "glass",
-        "pickle glass",
         "ai assistant",
         "real-time",
-        "live summary",
-        "contextual ai"
+        "live summary"
     ],
     "author": {
-        "name": "Pickle Team"
+        "name": "VibeHacking"
     },
     "license": "GPL-3.0",
     "dependencies": {
@@ -33,6 +31,19 @@
         "electron": "^38.1.2",
         "electron-builder": "^26.0.12",
         "esbuild": "^0.25.10"
+    },
+    "build": {
+        "appId": "com.vibehacking.lifehint",
+        "productName": "LifeHint",
+        "mac": {
+            "icon": "images/icon.png"
+        },
+        "win": {
+            "icon": "images/icon.png"
+        },
+        "linux": {
+            "icon": "images/icon.png"
+        }
     },
     "optionalDependencies": {
         "electron-liquid-glass": "^1.0.1"

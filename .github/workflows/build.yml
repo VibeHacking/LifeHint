@@ -65,7 +65,7 @@ jobs:
     - name: Package and Upload Ubuntu build
       run: |
         cd artifacts/build-ubuntu-latest
-        zip -r ../../glass-${{ github.ref_name }}-linux.zip .
+        zip -r ../../LifeHint-${{ github.ref_name }}-linux.zip .
         cd ../..
     
     - name: Upload Linux Release Asset
@@ -74,14 +74,14 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./glass-${{ github.ref_name }}-linux.zip
-        asset_name: glass-${{ github.ref_name }}-linux.zip
+        asset_path: ./LifeHint-${{ github.ref_name }}-linux.zip
+        asset_name: LifeHint-${{ github.ref_name }}-linux.zip
         asset_content_type: application/zip
     
     - name: Package and Upload Windows build
       run: |
         cd artifacts/build-windows-latest
-        zip -r ../../glass-${{ github.ref_name }}-windows.zip .
+        zip -r ../../LifeHint-${{ github.ref_name }}-windows.zip .
         cd ../..
     
     - name: Upload Windows Release Asset
@@ -90,14 +90,14 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./glass-${{ github.ref_name }}-windows.zip
-        asset_name: glass-${{ github.ref_name }}-windows.zip
+        asset_path: ./LifeHint-${{ github.ref_name }}-windows.zip
+        asset_name: LifeHint-${{ github.ref_name }}-windows.zip
         asset_content_type: application/zip
     
     - name: Package and Upload macOS build
       run: |
         cd artifacts/build-macos-latest
-        zip -r ../../glass-${{ github.ref_name }}-macos.zip .
+        zip -r ../../LifeHint-${{ github.ref_name }}-macos.zip .
         cd ../..
     
     - name: Upload macOS Release Asset
@@ -106,6 +106,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./glass-${{ github.ref_name }}-macos.zip
-        asset_name: glass-${{ github.ref_name }}-macos.zip
+        asset_path: ./LifeHint-${{ github.ref_name }}-macos.zip
+        asset_name: LifeHint-${{ github.ref_name }}-macos.zip
         asset_content_type: application/zip

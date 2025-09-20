@@ -28,7 +28,7 @@
     } else {
       panel.classList.remove("expanded");
       panel.classList.add("closed");
-      btnToggle.textContent = "open";
+      btnToggle.textContent = "Minimize";
     }
   }
 

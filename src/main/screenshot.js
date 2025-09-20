@@ -6,17 +6,20 @@ const fs = require('fs');
 async function captureScreen() {
     try {
         const sources = await desktopCapturer.getSources({
-            types: ['screen'],
+            types: ['window'],
             thumbnailSize: { width: 1920, height: 1080 }
         });
         
-        // 取得主螢幕 (Windows 通常是第一個)
-        const primarySource = sources[0];
-        if (!primarySource) {
-            throw new Error('無法獲取螢幕來源');
+        const externalWindows = sources.filter(source => 
+            !source.name.toLowerCase().includes('electron') && source.name !== ''
+        );
+
+        const previousWindow = externalWindows[0];
+        if (!previousWindow) {
+            throw new Error('Unable to get screen source');
         }
-        
-        return primarySource.thumbnail.toPNG();
+
+        return previousWindow.thumbnail.toPNG();
     } catch (error) {
         console.error('截圖失敗:', error);
         throw error;

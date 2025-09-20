@@ -238,53 +238,6 @@ html, body {
     line-height: 1.4;
 }
 
-/* Simple Glass Window Styles */
-.simple-window {
-    width: 350px;
-    height: 250px;
-    background: rgba(0, 0, 0, 0.8);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 20px;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 25px;
-    box-shadow:
-        0 8px 32px rgba(0, 0, 0, 0.3),
-        0 2px 8px rgba(0, 0, 0, 0.2),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    animation: fadeIn 0.5s ease-out;
-    position: absolute;
-    overflow: hidden;
-    cursor: move;
-    -webkit-app-region: drag;
-    user-select: none;
-}
-
-.simple-window.dragging {
-    cursor: grabbing;
-    transform: scale(1.02);
-    box-shadow:
-        0 12px 40px rgba(0, 0, 0, 0.4),
-        0 4px 12px rgba(0, 0, 0, 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.15);
-}
-
-.simple-window::before {
-    content: '';
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    right: 10px;
-    bottom: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    pointer-events: none;
-}
 
 @keyframes fadeIn {
     from {
@@ -308,68 +261,6 @@ html, body {
     }
 }
 
-.simple-window .title {
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 1.6em;
-    font-weight: 300;
-    margin-bottom: 15px;
-    background: rgba(255, 255, 255, 0.05);
-    padding: 8px 16px;
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(5px);
-}
-
-.simple-window .content {
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 1em;
-    line-height: 1.5;
-    background: rgba(255, 255, 255, 0.03);
-    padding: 12px 18px;
-    border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.simple-window .time {
-    margin-top: 20px;
-    color: rgba(255, 255, 255, 0.6);
-    font-size: 0.9em;
-    font-family: monospace;
-    background: rgba(0, 0, 0, 0.3);
-    padding: 6px 12px;
-    border-radius: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    min-width: 100px;
-}
-
-.corner-decoration {
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.corner-decoration.top-left {
-    top: 15px;
-    left: 15px;
-}
-
-.corner-decoration.top-right {
-    top: 15px;
-    right: 15px;
-}
-
-.corner-decoration.bottom-left {
-    bottom: 15px;
-    left: 15px;
-}
-
-.corner-decoration.bottom-right {
-    bottom: 15px;
-    right: 15px;
-}
 
 ::-webkit-scrollbar {
     width: 10px;   

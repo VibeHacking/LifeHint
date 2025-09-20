@@ -11,7 +11,7 @@ async function captureScreen() {
         });
         
         const externalWindows = sources.filter(source => 
-            !source.name.toLowerCase().includes('electron') && source.name !== ''
+            !source.name.includes('VibeGlassing') && source.name !== ''
         );
 
         const previousWindow = externalWindows[0];

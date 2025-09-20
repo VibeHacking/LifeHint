@@ -2,7 +2,12 @@
   "permissions": {
     "allow": [
       "Bash(npm install:*)",
-      "Bash(npx:*)"
+      "Bash(npx:*)",
+      "Bash(npm run postinstall:*)",
+      "Bash(npm cache clean:*)",
+      "Bash(node:*)",
+      "Bash(electron:*)",
+      "Bash(curl:*)"
     ],
     "deny": [],
     "ask": []

@@ -60,7 +60,8 @@
     "devDependencies": {
         "@electron/fuses": "^1.8.0",
         "@electron/notarize": "^2.5.0",
-        "electron": "^32.3.3",
+        "@types/electron": "^1.4.38",
+        "electron": "^38.1.2",
         "electron-builder": "^26.0.12",
         "electron-reloader": "^1.2.3",
         "esbuild": "^0.25.5",

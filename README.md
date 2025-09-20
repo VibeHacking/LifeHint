@@ -1,3 +1,5 @@
+<img width="800" height="64" alt="Screenshot 2025-09-20 at 6 58 19 PM" src="https://github.com/user-attachments/assets/b87f4529-71cf-46de-aebf-8499c7625603" />
+
 <p align="center">
   <a href="https://pickle.com/glass">
    <img src="./public/assets/banner.gif" alt="Logo">

@@ -177,7 +177,7 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 8px 12px;
+    padding: 8px 8px 8px 12px;
     border-bottom: 1px solid var(--glass-border);
 }
 

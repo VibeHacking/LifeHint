@@ -44,7 +44,7 @@ html, body {
     background: var(--glass-bg-deeper);
     backdrop-filter: blur(32px) saturate(180%);
     border-bottom: 1px solid var(--glass-border);
-    border-radius: 16px 16px 16px 16px;
+    border-radius: 22px 22px 22px 22px;
     box-shadow:
         0 4px 16px rgba(0, 0, 0, 0.25),
         0 2px 8px rgba(0, 0, 0, 0.15),
@@ -57,7 +57,7 @@ html, body {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    border-radius: 10px;
+    border-radius: 14px;
     border: 1px solid var(--glass-border);
     background: var(--glass-bg);
     color: var(--fg);
@@ -99,7 +99,7 @@ html, body {
 }
 
 #mode .ghost-btn {
-    font-size: 11px;
+    font-size: 12px;
     white-space: nowrap;
     min-width: 120px;
 }
@@ -112,7 +112,7 @@ html, body {
 #mode-select {
     appearance: none;
     padding: 6px 10px;
-    border-radius: 10px;
+    border-radius: 16px;
     border: 1px solid var(--glass-border-strong);
     background: rgba(255, 255, 255, 0.1);
     color: var(--fg);

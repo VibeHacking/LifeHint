@@ -84,6 +84,13 @@
     const textEl = suggestionEl.querySelector('.text');
     if (!textEl) return;
     const text = textEl.textContent;
+    
+    // Add copied visual feedback
+    suggestionEl.classList.add('copied');
+    setTimeout(() => {
+      suggestionEl.classList.remove('copied');
+    }, 600);
+    
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(text).catch(() => fallbackCopy(text));
     } else {

@@ -65,8 +65,8 @@ function setupScreenshotHandlers() {
             try {
                 const form = new FormData();
                 form.append('instruction', mode === 'action-steps' ?
-                    'Analyze the screenshot and suggest actionable steps.' :
-                    'Summarize the situation and suggest a concise reply.');
+                    'Analyze the screenshot and suggest actionable steps. Return exactly three concise answers separated by §§§. Do not include numbering or extra text.' :
+                    'Summarize the situation and suggest concise replies. Return exactly three concise answers separated by §§§. Do not include numbering or extra text.');
                 form.append('image', screenshot, {
                     filename: filename,
                     contentType: 'image/png'
@@ -113,6 +113,11 @@ function setupScreenshotHandlers() {
 
                 // 根據模式回傳不同的 mock 資料
                 if (mode === 'action-steps') {
+                const answers = [
+                    '檢查目前開啟的應用程式狀態',
+                    '確認是否有未完成的任務需要處理',
+                    '整理桌面以提升工作效率'
+                ];
                 return {
                     success: true,
                     mode,
@@ -120,22 +125,15 @@ function setupScreenshotHandlers() {
                     screenshotPath,
                     screenshotSize: screenshot.length,
                     summary: '螢幕分析完成 - 操作建議',
-                    analysisText: `根據螢幕截圖分析，以下是建議的操作步驟：
-
-1. 檢查目前開啟的應用程式狀態
-2. 確認是否有未完成的任務需要處理
-3. 考慮切換到相關的工作區域
-4. 如有需要，可以開啟新的應用程式視窗
-5. 建議整理桌面以提升工作效率`,
-                    suggestions: [
-                        '1. 檢查目前開啟的應用程式狀態',
-                        '2. 確認是否有未完成的任務需要處理',
-                        '3. 考慮切換到相關的工作區域',
-                        '4. 如有需要，可以開啟新的應用程式視窗',
-                        '5. 建議整理桌面以提升工作效率'
-                    ],
+                    analysisText: answers.join('§§§'),
+                    suggestions: answers,
                 };
             } else {
+                const answers = [
+                    '收到，我會盡快處理這件事',
+                    '好的，請問還有其他需要注意的地方嗎？',
+                    '辛苦了！有任何問題都可以隨時聯絡我'
+                ];
                 return {
                     success: true,
                     mode: 'text-reply',
@@ -143,21 +141,8 @@ function setupScreenshotHandlers() {
                     screenshotPath,
                     screenshotSize: screenshot.length,
                     summary: '螢幕分析完成 - 回覆建議',
-                    analysisText: `基於目前螢幕內容的智能回覆建議：
-
-根據畫面顯示的內容，建議您可以：
-- 回覆確認收到相關訊息
-- 詢問是否需要進一步協助
-- 分享相關的想法或意見
-- 提供具體的時間安排
-- 表達感謝或關心`,
-                    suggestions: [
-                        '收到，我會盡快處理這件事',
-                        '好的，請問還有其他需要注意的地方嗎？',
-                        '謝謝你的提醒，我覺得這個想法很不錯',
-                        '我大概會在下午完成，到時候再跟你確認',
-                        '辛苦了！有任何問題都可以隨時聯絡我'
-                    ],
+                    analysisText: answers.join('§§§'),
+                    suggestions: answers,
                 };
                 }
             }

@@ -11,6 +11,7 @@
   const btnClose = $("#btn-close");
   const modeSelect = $("#mode-select");
   const suggestionsEl = $("#suggestions");
+  const DELIMITER = '§§§';
 
   function isHotkey(event, spec) {
     return (
@@ -39,7 +40,9 @@
   btnToggle.addEventListener("click", togglePanel);
 
   function renderMock(data) {
-    const items = data.suggestions || [];
+    const items = (data.analysisText && data.analysisText.includes(DELIMITER))
+      ? data.analysisText.split(DELIMITER).map((s) => s.trim()).filter(Boolean)
+      : (data.suggestions || []);
     const html = items
       .map((s) => {
         return `
@@ -62,6 +65,31 @@
       }
     }, 10);
   }
+
+  function fallbackCopy(text) {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); } catch (e) {}
+    document.body.removeChild(ta);
+  }
+
+  // Click-to-copy on suggestion blocks
+  suggestionsEl.addEventListener('click', (e) => {
+    const suggestionEl = e.target.closest('.suggestion');
+    if (!suggestionEl) return;
+    const textEl = suggestionEl.querySelector('.text');
+    if (!textEl) return;
+    const text = textEl.textContent;
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).catch(() => fallbackCopy(text));
+    } else {
+      fallbackCopy(text);
+    }
+  });
 
   async function captureAndAnalyze() {
     btnCapture.disabled = true;

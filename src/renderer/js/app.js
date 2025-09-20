@@ -25,14 +25,14 @@
       panel.classList.remove("closed");
       panel.classList.add("expanded");
       btnToggle.textContent = "Minimize";
-      // 展開時：恢復完整高度
       window.api.resizeWindow(800, 400);
     } else {
       panel.classList.remove("expanded");
       panel.classList.add("closed");
       btnToggle.textContent = "Expand";
-      // 收起時：只保留 topbar 的高度
-      window.api.resizeWindow(800, 64);
+      setTimeout(() => {
+        window.api.resizeWindow(800, 64);
+      }, 300);
     }
   }
 

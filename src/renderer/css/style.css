@@ -139,7 +139,7 @@ html, body {
     left: 10px;
     right: 10px;
     top: 70px;
-    height: 150px;
+    height: 300px;
     border-radius: 16px;
     border: 1px solid var(--glass-border);
     background: var(--glass-bg-dark);

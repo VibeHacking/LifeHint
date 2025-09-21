@@ -1,69 +1,129 @@
-<p align="center">
-  <img width="800" height="64" alt="Screenshot 2025-09-20 at 6 58 19 PM" src="https://github.com/user-attachments/assets/b87f4529-71cf-46de-aebf-8499c7625603" />
-</p>
+# LifeHint
 
-<p align="center">
-  <a href="https://pickle.com/glass">
-   <img src="./public/assets/banner.gif" alt="Logo">
-  </a>
+**AI-Powered Communication Guardian for Respectful Interactions**
 
-  <h1 align="center">Glass by Pickle: Digital Mind Extension 🧠</h1>
+LifeHint is a lightweight desktop application that helps you communicate more thoughtfully by analyzing your intended words before you speak. Prevent unintentional offense or harassment by getting AI feedback on your communication before it reaches others.
 
-</p>
+## ✨ Highlights
 
-🤖 **Fast, light & open-source**—Glass lives on your desktop, sees what you see, listens in real time, understands your context, and turns every moment into structured knowledge.
+🚀 **Fast & Lightweight** - Minimal resource usage with instant response times
 
-💬 **Proactive in meetings**—it surfaces action items, summaries, and answers the instant you need them.
+🛡️ **Communication Guardian** - AI-powered analysis to prevent offensive or harassing language
 
-🫥️ **Truly invisible**—never shows up in screen recordings, screenshots, or your dock; no always-on capture or hidden sharing.
+⚡ **Real-time Feedback** - Instant analysis of your words before you send them
 
-To have fun building with us, join our [Discord](https://discord.gg/UCZH5B5Hpd)!
+🤝 **Respectful Communication** - Help maintain positive and professional interactions
 
-## Instant Launch
+🎯 **Context-Aware** - Understands different communication contexts and audiences
 
-⚡️  Skip the setup—launch instantly with our ready-to-run macOS app.  [[Download Here]](https://www.dropbox.com/scl/fi/znid09apxiwtwvxer6oc9/Glass_latest.dmg?rlkey=gwvvyb3bizkl25frhs4k1zwds&st=37q31b4w&dl=1)
+🔄 **Auto-Expand Panel** - Smart panel behavior that opens when new analysis arrives
 
-## Quick Start (Local Build)
+## 🛠 Installation
 
 ### Prerequisites
 
-First download & install [Python](https://www.python.org/downloads/) and [Node](https://nodejs.org/en/download).
-If you are using Windows, you need to also install [Build Tools for Visual Studio](https://visualstudio.microsoft.com/downloads/)
+Before installing LifeHint, ensure you have the following installed:
 
-Ensure you're using Node.js version 20.x.x to avoid build errors with native dependencies.
+- **Node.js** (version 20.x.x recommended)
+- **Python** (latest version)
+- **npm** (comes with Node.js)
+
+### Verify Node.js Version
 
 ```bash
 # Check your Node.js version
 node --version
 
-# If you need to install Node.js 20.x.x, we recommend using nvm:
-# curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
-# nvm install 20
-# nvm use 20
+# If you need Node.js 20.x.x, use nvm (recommended):
+# Install nvm first, then:
+nvm install 20
+nvm use 20
 ```
 
-### Installation
+### Quick Setup
 
-```bash
-npm run setup
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/VibeHacking/LifeHint.git
+   cd LifeHint
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Start the application**
+   ```bash
+   npm start
+   ```
+
+## 🎮 Usage
+
+### Keyboard Shortcuts
+
+| Shortcut | Action |
+|----------|--------|
+| `Ctrl + J` | Toggle main panel (expand/minimize) |
+| `Ctrl + Shift + S` | Analyze your text/speech for potential issues |
+
+### Basic Workflow
+
+1. **Launch LifeHint** - The application starts with a minimized panel
+2. **Check Your Communication** - Press `Ctrl + Shift + S` to analyze your intended message
+3. **Review Feedback** - The panel automatically expands to show AI analysis and suggestions
+4. **Improve Your Message** - Get recommendations to make your communication more respectful
+5. **Toggle Panel** - Use `Ctrl + J` to manually expand or minimize the panel
+
+### Features
+
+- **Smart Panel Behavior**: The panel automatically opens when new communication analysis arrives
+- **Multiple Check Modes**: Choose different modes for various communication contexts
+- **Respectful Suggestions**: Get alternative phrasings that are more considerate
+- **Responsive Design**: Panel dynamically adjusts height based on feedback content
+
+## 🔧 Configuration
+
+### Communication Check Modes
+
+Select different check modes from the dropdown menu:
+- **Harassment Check**: Detect potentially harassing or offensive language
+- **Professional Tone**: Ensure your message maintains professional standards
+- **Cultural Sensitivity**: Check for cultural or social sensitivity issues
+
+## 🚀 Development
+
+### Project Structure
+
+```
+src/
+├── renderer/
+│   ├── js/
+│   │   └── app.js          # Main application logic
+│   ├── css/
+│   └── html/
+└── main/                   # Electron main process
 ```
 
-## Highlights
+### Key Components
 
+- **Panel Management**: Auto-expanding panel system
+- **AI Communication Analysis**: Text analysis for respectful communication
+- **Hotkey System**: Global keyboard shortcuts for quick checks
+- **Suggestion System**: Alternative phrasing recommendations
 
-### Ask: get answers based on all your previous screen actions & audio
+## 📝 Contributing
 
-<img width="100%" alt="booking-screen" src="./public/assets/00.gif">
+We welcome contributions! Please feel free to submit issues and pull requests.
 
-**Currently Supporting:**
-- OpenAI API: Get OpenAI API Key [here](https://platform.openai.com/api-keys)
-- Gemini API: Get Gemini API Key [here](https://aistudio.google.com/apikey)
-- Local LLM Ollama & Whisper
+## 👥 Team
 
-## Keyboard Shortcuts
+Developed by **VibeHacking** - Building tools for better human connections.
 
-`Ctrl/Cmd + \` : show and hide main window
+## 📄 License
 
-`Ctrl/Cmd + Enter` : ask AI using all your previous screen and audio
+This project is open source. Please check the license file for details.
 
-`Ctrl/Cmd + Arrows` : move main window position
+---
+
+**LifeHint** - Your communication guardian for more respectful and thoughtful interactions.

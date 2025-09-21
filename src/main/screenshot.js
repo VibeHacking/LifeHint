@@ -81,10 +81,34 @@ function setupScreenshotHandlers() {
                         res.on('end', () => {
                             console.log('AI API 回應:', data);
                             try {
-                                const parsed = JSON.parse(data);
-                                resolve(parsed);
+                                // Check if response is JSON
+                                if (data.trim().startsWith('{')) {
+                                    const parsed = JSON.parse(data);
+                                    resolve(parsed);
+                                } else {
+                                    // Handle structured text response with XML-like tags
+                                    const resultMatch = data.match(/<result>([\s\S]*?)<\/result>/);
+                                    if (resultMatch) {
+                                        const resultText = resultMatch[1].trim();
+                                        // Extract the three options separated by §§§
+                                        // resultText = resultText.split('<|channel|>final<|message|>').slice(1).trim();
+                                        const suggestions = resultText.split('§§§')
+                                            .map(s => s.trim())
+                                            .filter(s => s && !s.startsWith('Option'))
+                                            .slice(0, 3);
+
+                                        resolve({
+                                            analysisText: suggestions.join('§§§'),
+                                            suggestions: suggestions
+                                        });
+                                    } else {
+                                        // Fallback: try to extract any text that looks like suggestions
+                                        const cleanText = data.replace(/<[^>]+>/g, '').trim();
+                                        resolve({ analysisText: cleanText });
+                                    }
+                                }
                             } catch (e) {
-                                console.error('JSON 解析失敗:', e, '原始回應:', data);
+                                console.error('Response 解析失敗:', e, '原始回應:', data);
                                 resolve({ analysisText: data });
                             }
                         });
@@ -92,6 +116,34 @@ function setupScreenshotHandlers() {
                     req.on('error', reject);
                 });
                 console.log('AI API 回應:', response);
+
+                // Process suggestions from response
+                let suggestions = [];
+                let analysisText = '';
+
+                if (response.suggestions && Array.isArray(response.suggestions)) {
+                    suggestions = response.suggestions;
+                    analysisText = suggestions.join('§§§');
+                } else if (response.analysisText) {
+                    analysisText = response.analysisText;
+                    // Split by §§§ if present
+                    if (analysisText.includes('§§§')) {
+                        suggestions = analysisText.split('§§§').map(s => s.trim()).filter(s => s);
+                    } else {
+                        suggestions = [analysisText];
+                    }
+                } else if (response.image_content) {
+                    analysisText = response.image_content;
+                    suggestions = [response.image_content];
+                } else if (response.suggestion) {
+                    suggestions = [response.suggestion];
+                    analysisText = response.suggestion;
+                } else {
+                    suggestions = ['無建議'];
+                    analysisText = '分析完成';
+                }
+                // suggestions = analysisText.split('<result>')[1].split('§§§').map(s => s.trim()).filter(s => s);
+                suggestions = analysisText.split('<result>')[1].split('§§§').map(s => s.trim()).filter(s => s);
                 return {
                     success: true,
                     mode,
@@ -99,8 +151,8 @@ function setupScreenshotHandlers() {
                     screenshotPath,
                     screenshotSize: screenshot.length,
                     summary: '螢幕分析完成',
-                    analysisText: response.image_content || response.analysisText || '分析完成',
-                    suggestions: response.suggestion ? [response.suggestion] : [response.image_content || '無建議'],
+                    analysisText,
+                    suggestions,
                     rawResponse: response
                 };
 

@@ -42,10 +42,16 @@ node --version
 # nvm use 20
 ```
 
-### Installation
+### 安裝與執行
 
+#### 1. 安裝專案依賴套件
 ```bash
-npm run setup
+npm install
+```
+
+#### 2. 執行專案
+```bash
+npx electron ./src/main/main.js
 ```
 
 ## Highlights
@@ -55,10 +61,6 @@ npm run setup
 
 <img width="100%" alt="booking-screen" src="./public/assets/00.gif">
 
-**Currently Supporting:**
-- OpenAI API: Get OpenAI API Key [here](https://platform.openai.com/api-keys)
-- Gemini API: Get Gemini API Key [here](https://aistudio.google.com/apikey)
-- Local LLM Ollama & Whisper
 
 ## Keyboard Shortcuts
 

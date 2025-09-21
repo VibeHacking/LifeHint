@@ -55,7 +55,13 @@
     suggestionsEl.innerHTML =
       html || '<div class="suggestion"><div class="text">尚無建議</div></div>';
 
-    // 根據內容量動態調整面板高度
+    if (panel.classList.contains("closed")) {
+      panel.classList.remove("closed");
+      panel.classList.add("expanded");
+      btnToggle.textContent = "Minimize";
+      window.api.resizeWindow(800, 400);
+    }
+
     setTimeout(() => {
       const contentHeight = suggestionsEl.scrollHeight + 60; // 加上 header 高度
       if (contentHeight > 180) {
